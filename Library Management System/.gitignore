@@ -1,0 +1,7 @@
+﻿[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+# Ignore the trained model file if you want a fresh start on other machines
+# model.zip
