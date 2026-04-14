@@ -5,7 +5,7 @@ namespace LibraryManagementSystem.Services;
 public class SummaryService
 {
     // 1. Put your verified API Key here
-    private readonly string _apiKey = "AIzaSyBKtMOUbCM8VNdJjps0gfav_2EMhrmsYMs";
+    private readonly string _apiKey = "YOUR_API_KEY";
     private readonly HttpClient _httpClient = new HttpClient();
 
     public async Task<string> GenerateSummaryAsync(string title, string genre)
