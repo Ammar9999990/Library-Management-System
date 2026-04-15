@@ -3,7 +3,12 @@ using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Services;
 using System.Threading;
 
-var db = new LibraryDbContext("mongodb://localhost:27017", "LibraryML");
+// --- DOCKER COMPATIBLE CONNECTION LOGIC ---
+// Use the Environment Variable if it exists (for Docker), otherwise use localhost
+string connectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION") ?? "mongodb://localhost:27017";
+var db = new LibraryDbContext(connectionString, "LibraryML");
+// ------------------------------------------
+
 var engine = new RecommendationEngine();
 var ai = new SummaryService(); // Initialize the AI Service
 
@@ -76,7 +81,7 @@ async Task RentBookMenu(LibraryDbContext db)
 {
     Console.Clear();
     Console.WriteLine("==================================================================");
-    Console.WriteLine("                      USER: BATCH RENTAL                          ");
+    Console.WriteLine("                    USER: BATCH RENTAL                          ");
     Console.WriteLine("==================================================================");
 
     var books = await db.GetBooksAsync();

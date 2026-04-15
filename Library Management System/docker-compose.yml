@@ -1,0 +1,24 @@
+﻿services:
+  # The Database Service
+  mongodb:
+    image: mongo:latest
+    container_name: library_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # The C# Application Service
+  library-app:
+    build: .
+    container_name: library_ai_app
+    depends_on:
+      - mongodb
+    # This allows you to interact with the Console menu inside Docker
+    stdin_open: true 
+    tty: true
+    environment:
+      - MONGO_CONNECTION=mongodb://mongodb:27017
+
+volumes:
+  mongo_data:
